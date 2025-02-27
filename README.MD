@@ -76,7 +76,7 @@ A Telegram bot that processes ICS calendar files containing schedule events and 
      -e REMINDER_MINUTE="0" \
      -e REMINDER_INTERVAL_HOURS="2" \
      -e TZ="Europe/Brussels" \
-     -v $(pwd)/calendar_bot_data:/app/data \
+     -v $(pwd)/data:/app/data \
      ghcr.io/elehiggle/calendar-reminder-telegram-bot:latest
 
 ## Configuration
@@ -88,7 +88,7 @@ A Telegram bot that processes ICS calendar files containing schedule events and 
 | `TELEGRAM_BOT_TOKEN` | Your Telegram bot token | - | Yes |
 | `WHITELIST_USERS` | Comma-separated list of allowed user IDs | Empty (allows all) | No |
 | `IGNORED_TERMS` | Terms to ignore in events, separated by `\|\|` | Wertstoffhof geschlossen | No |
-| `DATA_PATH` | Directory to store user data | ./data | No |
+| `DATA_PATH` | Directory to store user data, use this if you are not in a Docker environment and do not want the data directory in your current folder | ./data | No |
 | `REMINDER_HOUR` | Hour of the day (0-23) for the initial reminder | 17 (5 PM) | No |
 | `REMINDER_MINUTE` | Minute (0-59) for the initial reminder | 0 | No |
 | `REMINDER_INTERVAL_HOURS` | Hours between follow-up reminders | 2 | No |

@@ -23,7 +23,7 @@ user_reminders = {}
 work_dir = os.getcwd(); 
 
 # Set up data directory
-data_path = os.getenv("DATA_PATH", os.path.join(work_dir, 'calendar_bot_data'))
+data_path = os.getenv("DATA_PATH", os.path.join(work_dir, 'data'))
 
 # Load reminder timing configuration
 reminder_hour = int(os.getenv('REMINDER_HOUR', '17'))  # Default 5 PM

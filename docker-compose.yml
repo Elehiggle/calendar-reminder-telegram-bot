@@ -12,7 +12,7 @@ services:
       timeout: 10s
       retries: 3
     volumes:
-      - ./calendar_bot_data:/app/data
+      - ./data:/app/data
     env_file:
       - path: ./.env
         required: false
