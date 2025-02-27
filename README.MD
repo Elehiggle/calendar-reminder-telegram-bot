@@ -1,5 +1,7 @@
 # Calendar Reminder Telegram Bot
 
+![Showcase](./example.png)
+
 A Telegram bot that processes ICS calendar files containing schedule events and sends timely reminders to users, repeating at configurable intervals until they press the "Acknowledge" button so they never miss an event.
 
 > **Note:** This bot was created with a few AI prompts and works for my waste garbage collection calendar. The code quality is questionable. Your experience may vary based on your specific calendar format and requirements.
