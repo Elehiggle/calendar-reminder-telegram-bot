@@ -25,7 +25,7 @@ A Telegram bot that processes ICS calendar files containing schedule events and 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Elehiggle/calendar-reminder-telegram-bot.git
-   cd waste-collection-reminder-bot
+   cd calendar-reminder-telegram-bot
    ```
 
 2. Install dependencies:
@@ -53,8 +53,8 @@ A Telegram bot that processes ICS calendar files containing schedule events and 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/waste-collection-reminder-bot.git
-   cd waste-collection-reminder-bot
+   git clone https://github.com/yourusername/calendar-reminder-telegram-bot.git
+   cd calendar-reminder-telegram-bot
    ```
 
 2. Update the `.env` file with your configuration.
