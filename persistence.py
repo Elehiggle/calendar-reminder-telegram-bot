@@ -24,6 +24,7 @@ def save_user_reminders(data_path, user_id, reminders):
     for event_id, event_data in reminders.items():
         reminder_data = {
             'summary': event_data['summary'],
+            'event_type': event_data.get('event_type') or event_data['summary'],
             'start_time': event_data['start_time'].isoformat(),
             'acknowledged': event_data['acknowledged'],
             'first_reminder': event_data.get('first_reminder', True)
@@ -67,6 +68,7 @@ def load_user_reminders(data_path, user_id):
         for event_id, event_data in serialized_reminders.items():
             reminders[event_id] = {
                 'summary': event_data['summary'],
+                'event_type': event_data.get('event_type') or event_data['summary'],
                 'start_time': datetime.fromisoformat(event_data['start_time']),
                 'acknowledged': event_data['acknowledged'],
                 'job': None
