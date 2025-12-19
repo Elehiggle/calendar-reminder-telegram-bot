@@ -3,7 +3,7 @@ from datetime import datetime, time, timedelta
 from dotenv import load_dotenv
 import os
 import logging
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, BotCommand
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes
 from icalendar import Calendar
 from persistence import ensure_data_directory, save_user_reminders, load_user_reminders, load_all_users
@@ -391,6 +391,17 @@ async def restore_jobs(context: ContextTypes.DEFAULT_TYPE) -> None:
     if expired_events_removed > 0:
         logger.info(f"Removed {expired_events_removed} expired events during startup")
 
+async def setup_bot_commands(context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Register bot commands for the Telegram interface."""
+    commands = [
+        BotCommand("start", "Start the bot and show welcome message"),
+        BotCommand("help", "Show help and usage instructions"),
+        BotCommand("list", "List all your upcoming reminders"),
+        BotCommand("clear", "Clear all your reminders")
+    ]
+    await context.bot.set_my_commands(commands)
+    logger.info("Bot commands registered.")
+
 def main() -> None:
     """Start the bot."""
     ensure_data_directory(data_path)
@@ -409,8 +420,9 @@ def main() -> None:
     application.add_handler(MessageHandler(filters.Document.MimeType("text/calendar"), handle_ics_file))
     application.add_handler(CallbackQueryHandler(button_callback))
     
-    # Set up jobs restoration when the bot starts
+    # Set up jobs restoration and bot commands when the bot starts
     application.job_queue.run_once(restore_jobs, 1)
+    application.job_queue.run_once(setup_bot_commands, 2)
 
     # Run the bot
     while True:
