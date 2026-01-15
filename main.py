@@ -58,7 +58,8 @@ def _now_like(reference: datetime) -> datetime:
 def _event_cutoff(event_start: datetime) -> datetime:
     event_date = event_start.date()
     tzinfo = event_start.tzinfo
-    return datetime.combine(event_date + timedelta(days=1), time.min, tzinfo=tzinfo) if tzinfo else datetime.combine(event_date + timedelta(days=1), time.min)
+    # Reminder window ends at the day rollover into the event day (00:00).
+    return datetime.combine(event_date, time.min, tzinfo=tzinfo) if tzinfo else datetime.combine(event_date, time.min)
 
 def _is_event_expired(event_start: datetime, now: datetime | None = None) -> bool:
     now = now or _now_like(event_start)
@@ -176,7 +177,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         "1. Upload your ICS calendar file containing garbage collection events\n"
         "2. The bot will automatically set reminders for all events except 'Wertstoffhof geschlossen'\n"
         f"3. You'll receive reminders the day before at {reminder_hour}:{reminder_minute:02d}\n"
-        f"4. Reminders will continue every {reminder_interval_hours} hours until midnight on the event day\n"
+        f"4. Reminders will continue every {reminder_interval_hours} hours until 00:00 (start of the event day)\n"
         "5. Press 'Acknowledge' to stop reminders for a specific event\n\n"
         "Commands:\n"
         "/start - Start the bot\n"
